@@ -56,7 +56,19 @@ class Browse extends React.Component {
     this.props.filterActions.loadRatings(this.parseFilters(qs));
   }
 
-  updateURL = (filter) => {
+  updateURL = (name, value) => {
+    // Get a deep copy of the filter state
+    let filter = queryString.parse(this.props.location.search);
+    if (value !== "") {
+      filter[name] = value;
+    } else {
+      delete filter[name];
+    }
+
+    if (name !== "offset") {
+      filter['offset'] = 0;
+    }
+
     // TODO: use https://github.com/sindresorhus/query-string
     let encode_data = [];
     for (let key in filter) {
