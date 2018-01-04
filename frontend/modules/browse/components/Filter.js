@@ -12,11 +12,6 @@ import { LinkContainer } from 'react-router-bootstrap'
 require("./../css/filter.scss");
 
 class Filter extends React.Component {
-  onClick = (event) => {
-    event.preventDefault();
-    this.props.doFilter(this.props.title, event.target.name);
-  };
-
   render() {
     const {formatMessage} = this.props.intl;
     const messages = defineMessages({
