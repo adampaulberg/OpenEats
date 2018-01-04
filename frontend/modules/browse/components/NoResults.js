@@ -5,8 +5,6 @@ import {
     defineMessages
 } from 'react-intl';
 
-import Spinner from 'react-spinkit';
-
 const NoResults = ({intl}) => {
   const messages = defineMessages({
     no_results: {
@@ -22,7 +20,6 @@ const NoResults = ({intl}) => {
         <div id="browse" className="row">
           <div className="spinner">
             <h3 className="no-results">{ intl.formatMessage(messages.no_results) }</h3>
-            <Spinner className="spinner-obj" spinnerName="circle" noFadeIn />
           </div>
         </div>
       </div>

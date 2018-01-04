@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import ListRecipes from './ListRecipes'
 import Pagination from './Pagination'
 
-const Results = ({ search, qs, updateURL }) => {
+const Results = ({ search, qs, updateURL, buildUrl }) => {
   return (
     <div className="row">
       <div className="col-xs-12">
@@ -20,7 +20,7 @@ const Results = ({ search, qs, updateURL }) => {
               limit={ qs.limit }
               count={ search.totalRecipes }
               offset={ qs.offset }
-              updateURL={ updateURL }
+              buildUrl={ buildUrl }
             />
           </div>
         </div>
@@ -29,10 +29,10 @@ const Results = ({ search, qs, updateURL }) => {
   )
 };
 
-// Results.propTypes = {
-//   search: PropTypes.object.required,
-//   qs: PropTypes.object.required,
-//   updateURL: PropTypes.func.required
-// };
+Results.propTypes = {
+  search: PropTypes.object,
+  qs: PropTypes.object,
+  updateURL: PropTypes.func
+};
 
 export default Results;

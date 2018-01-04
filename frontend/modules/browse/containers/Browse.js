@@ -45,15 +45,15 @@ class Browse extends React.Component {
 
   reloadData(qs) {
     console.log('-----------------')
-    console.log(this.props.search[this.parseFilters(qs)])
-    console.log(this.props.search[queryString.stringify(this.parseFilters(qs))])
+    console.log(this.props.search[this.mergeDefaultFilters(qs)])
+    console.log(this.props.search[queryString.stringify(this.mergeDefaultFilters(qs))])
     console.log('-----------------')
-    if (!this.props.search[queryString.stringify(this.parseFilters(qs))]) {
-      this.props.searchActions.loadRecipes(this.parseFilters(qs));
+    if (!this.props.search[queryString.stringify(this.mergeDefaultFilters(qs))]) {
+      this.props.searchActions.loadRecipes(this.mergeDefaultFilters(qs));
     }
-    this.props.filterActions.loadCourses(this.parseFilters(qs));
-    this.props.filterActions.loadCuisines(this.parseFilters(qs));
-    this.props.filterActions.loadRatings(this.parseFilters(qs));
+    this.props.filterActions.loadCourses(this.mergeDefaultFilters(qs));
+    this.props.filterActions.loadCuisines(this.mergeDefaultFilters(qs));
+    this.props.filterActions.loadRatings(this.mergeDefaultFilters(qs));
   }
 
   updateURL = (name, value) => {
@@ -87,7 +87,16 @@ class Browse extends React.Component {
     history.push(path);
   };
 
-  parseFilters = (query) => {
+  buildUrl = (name, value) => {
+    if (!name) return '/browse/';
+
+    let qs = queryString.parse(this.props.location.search);
+    value !== "" ? qs[name] = value : delete qs[name];
+    let str = queryString.stringify(qs);
+    return str ? '/browse/?' + str : '/browse/';
+  };
+
+  mergeDefaultFilters = (query) => {
     let filter = {};
 
     if (Object.keys(DefaultFilters).length > 0) {
@@ -108,7 +117,7 @@ class Browse extends React.Component {
   render() {
     let { search, courses, cuisines, ratings } = this.props;
     let { filterActions, searchActions } = this.props;
-    const qs = this.parseFilters(queryString.parse(this.props.location.search));
+    const qs = this.mergeDefaultFilters(queryString.parse(this.props.location.search));
     const qsString = queryString.stringify(qs);
     console.log('=============')
     console.log(search)
@@ -123,6 +132,7 @@ class Browse extends React.Component {
         defaults={ DefaultFilters }
         qs={ qs }
         updateURL={ this.updateURL }
+        buildUrl={ this.buildUrl }
         filterActions={ filterActions }
         searchActions={ searchActions }
       />

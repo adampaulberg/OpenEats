@@ -1,25 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-const Pagination = ({ offset, limit, count, filter, updateURL }) => {
+const Pagination = ({ offset, limit, count, buildUrl }) => {
   offset = offset ? parseInt(offset) : 0;
   limit = limit ? parseInt(limit) : 0;
   count = count ? parseInt(count) : 0;
   let next = offset + limit;
   let previous = offset - limit;
 
-  const onClick = (event) => {
-    event.preventDefault();
-    if (filter) {
-      updateURL('offset', parseInt(event.target.name));
-    }
-  };
-
   const link = (title, offset, key) => (
     <li className="page-item" key={ key }>
-      <a className="page-link" href="#" name={ offset } onClick={ onClick }>
+      <Link className="page-link" to={ buildUrl('offset', offset) }>
         { title }
-      </a>
+      </Link>
     </li>
   );
 

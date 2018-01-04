@@ -26,6 +26,7 @@ class Search extends React.Component {
           defaults={ defaults }
           count={ search.totalRecipes }
           doFilter={ this.props.updateURL }
+          buildUrl={ this.props.buildUrl }
         />
         {
           search.recipes === undefined || search.recipes.length == 0 ?
@@ -34,7 +35,7 @@ class Search extends React.Component {
             <Results
               search={ search }
               qs={ qs }
-              updateURL={ this.props.updateURL }
+              buildUrl={ this.props.buildUrl }
             />
         }
       </div>

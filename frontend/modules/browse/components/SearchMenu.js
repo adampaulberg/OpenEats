@@ -1,5 +1,5 @@
 import React from 'react'
-import history from '../../common/history'
+import { Link } from 'react-router-dom'
 
 import Filter from './Filter'
 import SearchBar from './SearchBar'
@@ -7,13 +7,9 @@ import SearchBar from './SearchBar'
 class SearchMenu extends React.Component {
   reset = () => (
     <div className="btn-group" role="group">
-      <button
-        type="button"
-        className="btn btn-default"
-        onClick={ a => history.push('/browse') }
-      >
+      <Link className="btn btn-default" to={ this.props.buildUrl('', '') }>
         Reset
-      </button>
+      </Link>
     </div>
   );
 
@@ -45,7 +41,7 @@ class SearchMenu extends React.Component {
 
   render() {
     let { courses, cuisines, ratings, qs, count } = this.props;
-    let { doFilter } = this.props;
+    let { doFilter, buildUrl } = this.props;
 
     return (
       <div className="row search-menu">
@@ -55,19 +51,19 @@ class SearchMenu extends React.Component {
             title="course"
             data={ courses || [] }
             filter={ qs }
-            doFilter={ doFilter }
+            buildUrl={ buildUrl }
           />
           <Filter
             title="cuisine"
             data={ cuisines || [] }
             filter={ qs }
-            doFilter={ doFilter }
+            buildUrl={ buildUrl }
           />
           <Filter
             title="rating"
             data={ ratings || [] }
             filter={ qs }
-            doFilter={ doFilter }
+            buildUrl={ buildUrl }
           />
           <Filter
             title="limit"
@@ -77,7 +73,7 @@ class SearchMenu extends React.Component {
               {id: 3, title: "12", slug: "12"},
             ]}
             filter={ qs }
-            doFilter={ doFilter }
+            buildUrl={ buildUrl }
           />
           <Filter
             title="ordering"
@@ -87,7 +83,7 @@ class SearchMenu extends React.Component {
               {id: 3, title: "rating", slug: "-rating"},
             ]}
             filter={ qs }
-            doFilter={ doFilter }
+            buildUrl={ buildUrl }
           />
           { !this.showReset() ? this.reset() : '' }
           <div className="page-count">

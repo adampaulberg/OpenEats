@@ -7,6 +7,7 @@ import {
 } from 'react-intl';
 import classNames from 'classnames';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
 
 require("./../css/filter.scss");
 
@@ -47,18 +48,17 @@ class Filter extends React.Component {
       }
 
       return (
-        <MenuItem
-          className={classNames({
-            active: this.props.filter[this.props.title] === item.slug.toString()
-          })}
-          key={ item.slug }
-          eventKey={ item.slug }
-          name={ item.slug }
-          onClick={ this.onClick }
-        >
-          { item.title }
-          { item.total ? <span className="badge">{ item.total }</span> : '' }
-        </MenuItem>
+        <LinkContainer to={ this.props.buildUrl(this.props.title, item.slug) }>
+          <MenuItem
+            className={classNames({
+              active: this.props.filter[this.props.title] === item.slug.toString()
+            })}
+            key={ item.slug }
+          >
+            { item.title }
+            { item.total ? <span className="badge">{ item.total }</span> : '' }
+          </MenuItem>
+        </LinkContainer>
       );
     });
 
@@ -66,14 +66,11 @@ class Filter extends React.Component {
       <DropdownButton id="1" title={formatMessage(messages.filter_x, {title: this.props.title})}>
         { items }
         { this.props.filter[this.props.title] ?
-          <MenuItem
-            className="clear-filter"
-            name={''}
-            eventKey={'clear'}
-            onClick={this.onClick}
-          >
-            {formatMessage(messages.clear_filter)}
-          </MenuItem>
+          <LinkContainer to={ this.props.buildUrl(this.props.title, '') }>
+            <MenuItem className="clear-filter">
+              {formatMessage(messages.clear_filter)}
+            </MenuItem>
+          </LinkContainer>
           : ''
         }
       </DropdownButton>
