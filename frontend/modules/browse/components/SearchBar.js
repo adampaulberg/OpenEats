@@ -14,25 +14,21 @@ class SearchBar extends React.Component {
     this.state = {
       value: this.props.value || ''
     };
-
-    this._clearInput = this._clearInput.bind(this);
-    this._onChange = this._onChange.bind(this);
-    this._filter = this._filter.bind(this);
   }
 
-  _clearInput() {
+  _clearInput = () => {
     this.setState({ value: '' }, this._filter);
-  }
+  };
 
-  _onChange(event) {
+  _onChange = (event) =>  {
     this.setState({ value: event.target.value }, this._filter);
-  }
+  };
 
-  _filter() {
+  _filter = () => {
     if (this.props.doSearch) {
       this.props.doSearch(this.state.value);
     }
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.value) {
@@ -81,8 +77,12 @@ class SearchBar extends React.Component {
       <div className={ this.props.format }>
         <div className="input-group search-bar">
           <span className="input-group-addon" id="search_bar_label">
-            <span className="hidden-xs">{ formatMessage(messages.search) }:</span>
-            <span className="visible-xs">{ formatMessage(messages.search_mobile) }:</span>
+            <span className="hidden-xs">
+              { formatMessage(messages.search) }:
+            </span>
+            <span className="visible-xs">
+              { formatMessage(messages.search_mobile) }:
+            </span>
           </span>
           <DebounceInput
             name="SearchBar"
