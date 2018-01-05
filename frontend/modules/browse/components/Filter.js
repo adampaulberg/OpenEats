@@ -43,12 +43,11 @@ class Filter extends React.Component {
       }
 
       return (
-        <LinkContainer to={ this.props.buildUrl(this.props.title, item.slug) }>
+        <LinkContainer key={ item.slug } to={ this.props.buildUrl(this.props.title, item.slug) }>
           <MenuItem
             className={classNames({
               active: this.props.filter[this.props.title] === item.slug.toString()
             })}
-            key={ item.slug }
           >
             { item.title }
             { item.total ? <span className="badge">{ item.total }</span> : '' }
@@ -61,7 +60,9 @@ class Filter extends React.Component {
       <DropdownButton id="1" title={formatMessage(messages.filter_x, {title: this.props.title})}>
         { items }
         { this.props.filter[this.props.title] ?
-          <LinkContainer to={ this.props.buildUrl(this.props.title, '') }>
+          <LinkContainer
+            activeClassName=''
+            to={ this.props.buildUrl(this.props.title, '') }>
             <MenuItem className="clear-filter">
               {formatMessage(messages.clear_filter)}
             </MenuItem>

@@ -56,35 +56,13 @@ class Browse extends React.Component {
     this.props.filterActions.loadRatings(this.mergeDefaultFilters(qs));
   }
 
-  updateURL = (name, value) => {
-    // Get a deep copy of the filter state
-    let filter = queryString.parse(this.props.location.search);
-    if (value !== "") {
-      filter[name] = value;
-    } else {
-      delete filter[name];
-    }
-
-    if (name !== "offset") {
-      filter['offset'] = 0;
-    }
-
-    // TODO: use https://github.com/sindresorhus/query-string
-    let encode_data = [];
-    for (let key in filter) {
-      if (filter[key]) {
-        encode_data.push(
-          encodeURIComponent(key) + '=' + encodeURIComponent(filter[key])
-        );
-      }
-    }
-
-    let path = '/browse/';
-    if (encode_data.length > 0) {
-       path += '?' + encode_data.join('&');
-    }
-
-    history.push(path);
+  doSearch = (value) => {
+    console.log('hi');
+    let qs = queryString.parse(this.props.location.search);
+    value !== "" ? qs['search'] = value : delete qs['search'];
+    let str = queryString.stringify(qs);
+    str = str ? '/browse/?' + str : '/browse/';
+    history.push(str);
   };
 
   buildUrl = (name, value) => {
@@ -131,7 +109,7 @@ class Browse extends React.Component {
         ratings={ ratings }
         defaults={ DefaultFilters }
         qs={ qs }
-        updateURL={ this.updateURL }
+        doSearch={ this.doSearch }
         buildUrl={ this.buildUrl }
         filterActions={ filterActions }
         searchActions={ searchActions }

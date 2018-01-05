@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import ListRecipes from './ListRecipes'
 import Pagination from './Pagination'
 
-const Results = ({ search, qs, updateURL, buildUrl }) => {
+const Results = ({ search, qs, buildUrl }) => {
   return (
     <div className="row">
       <div className="col-xs-12">
@@ -32,7 +32,7 @@ const Results = ({ search, qs, updateURL, buildUrl }) => {
 Results.propTypes = {
   search: PropTypes.object,
   qs: PropTypes.object,
-  updateURL: PropTypes.func
+  buildUrl: PropTypes.func
 };
 
 export default Results;

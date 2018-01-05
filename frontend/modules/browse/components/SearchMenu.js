@@ -41,11 +41,11 @@ class SearchMenu extends React.Component {
 
   render() {
     let { courses, cuisines, ratings, qs, count } = this.props;
-    let { doFilter, buildUrl } = this.props;
+    let { doSearch, buildUrl } = this.props;
 
     return (
       <div className="row search-menu">
-        <SearchBar format="col-xs-12" value={ qs.search } filter={ doFilter }/>
+        <SearchBar format="col-xs-12" value={ qs.search } doSearch={ doSearch }/>
         <div className="col-xs-12">
           <Filter
             title="course"

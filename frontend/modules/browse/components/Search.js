@@ -25,7 +25,7 @@ class Search extends React.Component {
           qs={ qs }
           defaults={ defaults }
           count={ search.totalRecipes }
-          doFilter={ this.props.updateURL }
+          doSearch={ this.props.doSearch }
           buildUrl={ this.props.buildUrl }
         />
         {

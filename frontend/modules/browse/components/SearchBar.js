@@ -29,8 +29,8 @@ class SearchBar extends React.Component {
   }
 
   _filter() {
-    if (this.props.filter) {
-      this.props.filter('search', this.state.value);
+    if (this.props.doSearch) {
+      this.props.doSearch(this.state.value);
     }
   }
 
