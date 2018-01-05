@@ -9,7 +9,14 @@ function createFilterWithNamedType(filterName = '') {
 
     switch (action.type) {
       case FilterConstants.BROWSE_FILTER_LOAD:
-        return action.res;
+      // return action.res;
+      let newFilter = {};
+      newFilter[action.qs] = action.res;
+
+      return {
+        ...state,
+        ...newFilter
+      };
       default:
         return state;
     }

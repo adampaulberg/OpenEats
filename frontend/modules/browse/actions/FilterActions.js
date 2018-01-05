@@ -1,3 +1,5 @@
+import queryString from 'query-string'
+
 import { request } from '../../common/CustomSuperagent';
 import { serverURLs } from '../../common/config'
 import FilterConstants from '../constants/FilterConstants'
@@ -19,6 +21,7 @@ export const loadCourses = (filter) => {
         dispatch({
           type: FilterConstants.BROWSE_FILTER_LOAD,
           filterName: FilterConstants.BROWSE_FILTER_COURSE,
+          qs: queryString.stringify(filter),
           res: res.body.results
         })
       ));
@@ -42,6 +45,7 @@ export const loadCuisines = (filter) => {
         dispatch({
           type: FilterConstants.BROWSE_FILTER_LOAD,
           filterName: FilterConstants.BROWSE_FILTER_CUISINE,
+          qs: queryString.stringify(filter),
           res: res.body.results
         })
       ));
@@ -65,6 +69,7 @@ export const loadRatings = (filter) => {
         dispatch({
           type: FilterConstants.BROWSE_FILTER_LOAD,
           filterName: FilterConstants.BROWSE_FILTER_RATING,
+          qs: queryString.stringify(filter),
           res: res.body.results
         })
       ));

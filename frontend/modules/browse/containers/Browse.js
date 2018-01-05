@@ -44,16 +44,18 @@ class Browse extends React.Component {
   }
 
   reloadData(qs) {
-    console.log('-----------------')
-    console.log(this.props.search[this.mergeDefaultFilters(qs)])
-    console.log(this.props.search[queryString.stringify(this.mergeDefaultFilters(qs))])
-    console.log('-----------------')
     if (!this.props.search[queryString.stringify(this.mergeDefaultFilters(qs))]) {
       this.props.searchActions.loadRecipes(this.mergeDefaultFilters(qs));
     }
-    this.props.filterActions.loadCourses(this.mergeDefaultFilters(qs));
-    this.props.filterActions.loadCuisines(this.mergeDefaultFilters(qs));
-    this.props.filterActions.loadRatings(this.mergeDefaultFilters(qs));
+    if (!this.props.courses[queryString.stringify(this.mergeDefaultFilters(qs))]) {
+      this.props.filterActions.loadCourses(this.mergeDefaultFilters(qs));
+    }
+    if (!this.props.cuisines[queryString.stringify(this.mergeDefaultFilters(qs))]) {
+      this.props.filterActions.loadCuisines(this.mergeDefaultFilters(qs));
+    }
+    if (!this.props.ratings[queryString.stringify(this.mergeDefaultFilters(qs))]) {
+      this.props.filterActions.loadRatings(this.mergeDefaultFilters(qs));
+    }
   }
 
   doSearch = (value) => {
@@ -93,20 +95,17 @@ class Browse extends React.Component {
   };
 
   render() {
-    let { search, courses, cuisines, ratings } = this.props;
+    let { search, courses, cuisines, ratings, location } = this.props;
     let { filterActions, searchActions } = this.props;
-    const qs = this.mergeDefaultFilters(queryString.parse(this.props.location.search));
+    const qs = this.mergeDefaultFilters(queryString.parse(location.search));
     const qsString = queryString.stringify(qs);
-    console.log('=============')
-    console.log(search)
-    console.log(qsString)
-    console.log('=============')
+
     return (
       <Search
         search={ search[qsString] || {} }
-        courses={ courses }
-        cuisines={ cuisines }
-        ratings={ ratings }
+        courses={ courses[qsString] || [] }
+        cuisines={ cuisines[qsString] || [] }
+        ratings={ ratings[qsString] || [] }
         defaults={ DefaultFilters }
         qs={ qs }
         doSearch={ this.doSearch }

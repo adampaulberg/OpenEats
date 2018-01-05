@@ -4,7 +4,6 @@ function search(state = [], action) {
   switch (action.type) {
     case SearchConstants.BROWSE_SEARCH_LOAD:
       let newSearch = {};
-        console.log(action.qs)
       newSearch[action.qs] = {
         recipes: action.res.results,
         totalRecipes: action.res.count
