@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import ListRecipes from './ListRecipes'
 import Pagination from './Pagination'
 
-const Results = ({ search, qs, buildUrl }) => {
+const Results = ({ search, qs, defaults, buildUrl }) => {
   return (
     <div className="row">
       <div className="col-xs-12">
@@ -17,9 +17,9 @@ const Results = ({ search, qs, buildUrl }) => {
         <div className="row">
           <div className="col-xs-12">
             <Pagination
-              limit={ qs.limit }
+              limit={ qs.limit || defaults.limit }
               count={ search.totalRecipes }
-              offset={ qs.offset }
+              offset={ qs.offset || defaults.offset }
               buildUrl={ buildUrl }
             />
           </div>

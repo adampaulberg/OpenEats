@@ -23,7 +23,6 @@ class Search extends React.Component {
           cuisines={ cuisines }
           ratings={ ratings }
           qs={ qs }
-          defaults={ defaults }
           count={ search.totalRecipes }
           doSearch={ this.props.doSearch }
           buildUrl={ this.props.buildUrl }
@@ -35,6 +34,7 @@ class Search extends React.Component {
             <Results
               search={ search }
               qs={ qs }
+              defaults={ defaults }
               buildUrl={ this.props.buildUrl }
             />
         }

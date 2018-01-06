@@ -97,8 +97,8 @@ class Browse extends React.Component {
   render() {
     let { search, courses, cuisines, ratings, location } = this.props;
     let { filterActions, searchActions } = this.props;
-    const qs = this.mergeDefaultFilters(queryString.parse(location.search));
-    const qsString = queryString.stringify(qs);
+    const qs = queryString.parse(location.search);
+    const qsString = queryString.stringify(this.mergeDefaultFilters(qs));
 
     return (
       <Search

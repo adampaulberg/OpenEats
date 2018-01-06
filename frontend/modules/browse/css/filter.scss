@@ -1,13 +1,11 @@
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
 
 .search-menu {
-  .btn-group {
+  .filter-group {
     margin-right: 5px;
     margin-top: 5px;
   }
   .dropdown {
-    margin-right: 5px;
-    margin-top: 5px;
     .dropdown-menu {
       .badge {
         float: right;
@@ -18,5 +16,8 @@
     margin-top: 10px;
     display: inline-block;
     float: right;
+  }
+  .clear-search {
+    margin-top: -1px;
   }
 }
