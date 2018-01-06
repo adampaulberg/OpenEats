@@ -5,7 +5,10 @@ import { connect } from 'react-redux'
 import queryString from 'query-string'
 
 import history from '../../common/history'
-import Search from '../components/Search'
+import SearchMenu from '../components/SearchMenu'
+import Results from '../components/Results'
+import NoResults from '../components/NoResults'
+import Loading from '../components/Loading'
 import * as SearchActions from '../actions/SearchActions'
 import * as FilterActions from '../actions/FilterActions'
 import DefaultFilters from '../constants/DefaultFilters'
@@ -96,24 +99,54 @@ class Browse extends React.Component {
 
   render() {
     let { search, courses, cuisines, ratings, location } = this.props;
-    let { filterActions, searchActions } = this.props;
     const qs = queryString.parse(location.search);
     const qsString = queryString.stringify(this.mergeDefaultFilters(qs));
 
-    return (
-      <Search
-        search={ search.results[qsString] || {} }
-        courses={ courses.results[qsString] || [] }
-        cuisines={ cuisines.results[qsString] || [] }
-        ratings={ ratings.results[qsString] || [] }
-        defaults={ DefaultFilters }
-        qs={ qs }
-        doSearch={ this.doSearch }
-        buildUrl={ this.buildUrl }
-        filterActions={ filterActions }
-        searchActions={ searchActions }
-      />
-    );
+    // TODO: fix issue with apis being called even thouhg the data is avaiable.
+    // TODO: clean the below up.
+
+      // {/*<Search*/}
+      //   {/*search={ search.results[qsString] || {} }*/}
+      //   {/*courses={ courses.results[qsString] || [] }*/}
+      //   {/*cuisines={ cuisines.results[qsString] || [] }*/}
+      //   {/*ratings={ ratings.results[qsString] || [] }*/}
+      //   {/*defaults={ DefaultFilters }*/}
+      //   {/*qs={ qs }*/}
+      //   {/*doSearch={ this.doSearch }*/}
+      //   {/*buildUrl={ this.buildUrl }*/}
+      // {/*/>*/}
+
+    console.log(search.results);
+    if (Object.keys(search.results).length > 0 && search.results[qsString]) {
+      return (
+        <div className="container">
+          <SearchMenu
+              courses={ courses.results[qsString] }
+              cuisines={ cuisines.results[qsString] }
+              ratings={ ratings.results[qsString] }
+              qs={ qs }
+              count={ search.results[qsString].totalRecipes }
+              doSearch={ this.doSearch }
+              buildUrl={ this.buildUrl }
+          />
+          {
+            search.loading ?
+                <Loading/> :
+                search.results[qsString].recipes === undefined || search.results[qsString].recipes.length == 0 ?
+                    <NoResults/>
+                    :
+                    <Results
+                        search={ search.results[qsString] }
+                        qs={ qs }
+                        defaults={ DefaultFilters }
+                        buildUrl={ this.buildUrl }
+                    />
+          }
+        </div>
+      );
+    } else {
+      return <Loading/>
+    }
   }
 }
 
