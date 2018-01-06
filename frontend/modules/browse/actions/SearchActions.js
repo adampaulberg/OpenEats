@@ -6,7 +6,7 @@ import { serverURLs } from '../../common/config'
 
 export const loadRecipes = (filter) => {
   return dispatch => {
-    // dispatch({ actionType: 'REQUEST_LOAD_RECIPES' });
+    dispatch({ type: SearchConstants.BROWSE_SEARCH_LOADING });
 
     const map = {
       'cuisine': 'cuisine__slug',
@@ -25,7 +25,7 @@ export const loadRecipes = (filter) => {
       .query(parsedFilter)
       .then(res => (
         dispatch({
-          type: SearchConstants.BROWSE_SEARCH_LOAD,
+          type: SearchConstants.BROWSE_SEARCH_RESULTS,
           qs: queryString.stringify(filter),
           res: res.body
         })

@@ -2,21 +2,22 @@ import { combineReducers } from 'redux'
 import FilterConstants from '../constants/FilterConstants'
 
 function createFilterWithNamedType(filterName = '') {
-  return function filter(state = [], action) {
+  return function filter(state = { results: {}, loading: false }, action) {
     if (action.filterName !== filterName) {
       return state;
     }
 
     switch (action.type) {
+      case FilterConstants.BROWSE_FILTER_LOADING:
+        return { ...state, loading: true };
       case FilterConstants.BROWSE_FILTER_LOAD:
-      // return action.res;
-      let newFilter = {};
-      newFilter[action.qs] = action.res;
+        let newFilter = {};
+        newFilter[action.qs] = action.res;
 
-      return {
-        ...state,
-        ...newFilter
-      };
+        return {
+          results: { ...state.results, ...newFilter },
+          loading: false
+        };
       default:
         return state;
     }

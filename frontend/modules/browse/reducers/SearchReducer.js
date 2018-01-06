@@ -1,8 +1,10 @@
 import SearchConstants from '../constants/SearchConstants'
 
-function search(state = [], action) {
+function search(state = { results: {}, loading: false }, action) {
   switch (action.type) {
-    case SearchConstants.BROWSE_SEARCH_LOAD:
+    case SearchConstants.BROWSE_SEARCH_LOADING:
+      return { ...state, loading: true };
+    case SearchConstants.BROWSE_SEARCH_RESULTS:
       let newSearch = {};
       newSearch[action.qs] = {
         recipes: action.res.results,
@@ -10,8 +12,8 @@ function search(state = [], action) {
       };
 
       return {
-        ...state,
-        ...newSearch
+        results: { ...state.results, ...newSearch },
+        loading: false
       };
     default:
       return state;

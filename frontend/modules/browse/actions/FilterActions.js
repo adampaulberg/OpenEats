@@ -4,19 +4,26 @@ import { request } from '../../common/CustomSuperagent';
 import { serverURLs } from '../../common/config'
 import FilterConstants from '../constants/FilterConstants'
 
-export const loadCourses = (filter) => {
-  return dispatch => {
-    // dispatch({actionType: FilterConstants.REQUEST_LOAD_COURSES});
-    let parsed_filter = {};
+const parsedFilter = filter => {
+  let parsedFilters = {};
     for (let f in filter) {
       if (!['limit', 'offset'].includes(f)) {
-        parsed_filter[f] = filter[f];
+        parsedFilters[f] = filter[f];
       }
     }
+    return parsedFilters;
+};
+
+export const loadCourses = (filter) => {
+  return dispatch => {
+    dispatch({
+      type: FilterConstants.BROWSE_FILTER_LOADING,
+      filterName: FilterConstants.BROWSE_FILTER_COURSE,
+    });
 
     request()
       .get(serverURLs.course_count)
-      .query(parsed_filter)
+      .query(parsedFilter(filter))
       .then(res => (
         dispatch({
           type: FilterConstants.BROWSE_FILTER_LOAD,
@@ -30,17 +37,14 @@ export const loadCourses = (filter) => {
 
 export const loadCuisines = (filter) => {
   return dispatch => {
-    // dispatch({actionType: FilterConstants.REQUEST_LOAD_CUISINES});
-    let parsed_filter = {};
-    for (let f in filter) {
-      if (!['limit', 'offset'].includes(f)) {
-        parsed_filter[f] = filter[f];
-      }
-    }
+    dispatch({
+      type: FilterConstants.BROWSE_FILTER_LOADING,
+      filterName: FilterConstants.BROWSE_FILTER_CUISINE,
+    });
 
     request()
       .get(serverURLs.cuisine_count)
-      .query(parsed_filter)
+      .query(parsedFilter(filter))
       .then(res => (
         dispatch({
           type: FilterConstants.BROWSE_FILTER_LOAD,
@@ -54,17 +58,14 @@ export const loadCuisines = (filter) => {
 
 export const loadRatings = (filter) => {
   return dispatch => {
-    // dispatch({actionType: FilterConstants.REQUEST_LOAD_RATINGS});
-    let parsed_filter = {};
-    for (let f in filter) {
-      if (!['limit', 'offset'].includes(f)) {
-        parsed_filter[f] = filter[f];
-      }
-    }
+    dispatch({
+      type: FilterConstants.BROWSE_FILTER_LOADING,
+      filterName: FilterConstants.BROWSE_FILTER_RATING,
+    });
 
     request()
       .get(serverURLs.ratings)
-      .query(parsed_filter)
+      .query(parsedFilter(filter))
       .then(res => (
         dispatch({
           type: FilterConstants.BROWSE_FILTER_LOAD,

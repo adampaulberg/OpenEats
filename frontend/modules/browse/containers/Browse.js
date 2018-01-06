@@ -102,10 +102,10 @@ class Browse extends React.Component {
 
     return (
       <Search
-        search={ search[qsString] || {} }
-        courses={ courses[qsString] || [] }
-        cuisines={ cuisines[qsString] || [] }
-        ratings={ ratings[qsString] || [] }
+        search={ search.results[qsString] || {} }
+        courses={ courses.results[qsString] || [] }
+        cuisines={ cuisines.results[qsString] || [] }
+        ratings={ ratings.results[qsString] || [] }
         defaults={ DefaultFilters }
         qs={ qs }
         doSearch={ this.doSearch }
