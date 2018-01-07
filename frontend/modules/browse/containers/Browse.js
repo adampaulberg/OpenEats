@@ -102,44 +102,29 @@ class Browse extends React.Component {
     const qs = queryString.parse(location.search);
     const qsString = queryString.stringify(this.mergeDefaultFilters(qs));
 
-    // TODO: clean the below up.
-
-      // {/*<Search*/}
-      //   {/*search={ search.results[qsString] || {} }*/}
-      //   {/*courses={ courses.results[qsString] || [] }*/}
-      //   {/*cuisines={ cuisines.results[qsString] || [] }*/}
-      //   {/*ratings={ ratings.results[qsString] || [] }*/}
-      //   {/*defaults={ DefaultFilters }*/}
-      //   {/*qs={ qs }*/}
-      //   {/*doSearch={ this.doSearch }*/}
-      //   {/*buildUrl={ this.buildUrl }*/}
-      // {/*/>*/}
-
-    console.log(search.results);
     if (Object.keys(search.results).length > 0 && search.results[qsString]) {
       return (
         <div className="container">
           <SearchMenu
-              courses={ courses.results[qsString] }
-              cuisines={ cuisines.results[qsString] }
-              ratings={ ratings.results[qsString] }
-              qs={ qs }
-              count={ search.results[qsString].totalRecipes }
-              doSearch={ this.doSearch }
-              buildUrl={ this.buildUrl }
+            courses={ courses.results[qsString] }
+            cuisines={ cuisines.results[qsString] }
+            ratings={ ratings.results[qsString] }
+            qs={ qs }
+            count={ search.results[qsString].totalRecipes || 0 }
+            doSearch={ this.doSearch }
+            buildUrl={ this.buildUrl }
           />
           {
             search.loading ?
-                <Loading/> :
-                search.results[qsString].recipes === undefined || search.results[qsString].recipes.length == 0 ?
-                    <NoResults/>
-                    :
-                    <Results
-                        search={ search.results[qsString] }
-                        qs={ qs }
-                        defaults={ DefaultFilters }
-                        buildUrl={ this.buildUrl }
-                    />
+              <Loading/> :
+              !search.results[qsString] || search.results[qsString].recipes.length == 0 ?
+                <NoResults/> :
+                <Results
+                  search={ search.results[qsString] }
+                  qs={ qs }
+                  defaults={ DefaultFilters }
+                  buildUrl={ this.buildUrl }
+                />
           }
         </div>
       );

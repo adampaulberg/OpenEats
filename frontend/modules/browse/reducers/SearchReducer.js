@@ -1,6 +1,6 @@
 import SearchConstants from '../constants/SearchConstants'
 
-function search(state = { results: {}, loading: false }, action) {
+function search(state = { results: {}, loading: true }, action) {
   switch (action.type) {
     case SearchConstants.BROWSE_SEARCH_LOADING:
       return { ...state, loading: true };
