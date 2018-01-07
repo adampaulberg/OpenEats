@@ -111,7 +111,7 @@ class Browse extends React.Component {
     const qs = queryString.parse(location.search);
     const qsString = queryString.stringify(this.mergeDefaultFilters(qs));
 
-    if (Object.keys(search.results).length > 0 && search.results[qsString]) {
+    if (Object.keys(search.results).length > 0) {
       return (
         <div className="container">
           <SearchMenu
@@ -119,7 +119,7 @@ class Browse extends React.Component {
             cuisines={ cuisines.results[qsString] }
             ratings={ ratings.results[qsString] }
             qs={ qs }
-            count={ search.results[qsString].totalRecipes || 0 }
+            count={ search.results[qsString] ? search.results[qsString].totalRecipes : 0 }
             doSearch={ this.doSearch }
             buildUrl={ this.buildUrl }
           />
