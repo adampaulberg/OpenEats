@@ -26,9 +26,28 @@ class RecipeViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.RecipeSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
-    filter_fields = ('course__slug', 'cuisine__slug', 'course', 'cuisine', 'title', 'rating')
     search_fields = ('title', 'tags__title', 'ingredient_groups__ingredients__title')
     ordering_fields = ('pub_date', 'title', 'rating', )
+
+    def get_queryset(self):
+        query = Recipe.objects
+
+        filter_set = {}
+        if 'cuisine__slug' in self.request.query_params:
+            filter_set['cuisine__in'] = Cuisine.objects.filter(
+                slug__in=self.request.query_params.get('cuisine__slug').split(',')
+            )
+
+        if 'course__slug' in self.request.query_params:
+            filter_set['course__in'] = Course.objects.filter(
+                slug=self.request.query_params.get('course__slug').split(',')
+            )
+        if 'rating' in self.request.query_params:
+            filter_set['rating__in'] = self.request.query_params.get('rating').split(',')
+
+        print filter_set
+
+        return query.filter(**filter_set)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -96,16 +115,16 @@ class RatingViewSet(viewsets.ReadOnlyModelViewSet):
         filter_set = {}
         if 'cuisine' in self.request.query_params:
             try:
-                filter_set['cuisine'] = Cuisine.objects.get(
-                    slug=self.request.query_params.get('cuisine')
+                filter_set['cuisine__in'] = Cuisine.objects.filter(
+                    slug__in=self.request.query_params.get('cuisine').split(',')
                 )
             except:
                 return []
 
         if 'course' in self.request.query_params:
             try:
-                filter_set['course'] = Course.objects.get(
-                    slug=self.request.query_params.get('course')
+                filter_set['course__in'] = Course.objects.filter(
+                    slug__in=self.request.query_params.get('course').split(',')
                 )
             except:
                 return []

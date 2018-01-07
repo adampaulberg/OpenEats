@@ -74,7 +74,16 @@ class Browse extends React.Component {
     if (!name) return '/browse/';
 
     let qs = queryString.parse(this.props.location.search);
-    value !== "" ? qs[name] = value : delete qs[name];
+    if (value !== "") {
+      if (qs[name]) {
+        qs[name] = qs[name] + "," + value;
+      } else {
+        qs[name] = value;
+      }
+    } else {
+      delete qs[name];
+    }
+
     let str = queryString.stringify(qs);
     return str ? '/browse/?' + str : '/browse/';
   };
