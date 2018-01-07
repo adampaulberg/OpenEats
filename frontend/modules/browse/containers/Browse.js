@@ -47,16 +47,16 @@ class Browse extends React.Component {
   }
 
   reloadData(qs) {
-    if (!this.props.search[queryString.stringify(this.mergeDefaultFilters(qs))]) {
+    if (!this.props.search.results[queryString.stringify(this.mergeDefaultFilters(qs))]) {
       this.props.searchActions.loadRecipes(this.mergeDefaultFilters(qs));
     }
-    if (!this.props.courses[queryString.stringify(this.mergeDefaultFilters(qs))]) {
+    if (!this.props.courses.results[queryString.stringify(this.mergeDefaultFilters(qs))]) {
       this.props.filterActions.loadCourses(this.mergeDefaultFilters(qs));
     }
-    if (!this.props.cuisines[queryString.stringify(this.mergeDefaultFilters(qs))]) {
+    if (!this.props.cuisines.results[queryString.stringify(this.mergeDefaultFilters(qs))]) {
       this.props.filterActions.loadCuisines(this.mergeDefaultFilters(qs));
     }
-    if (!this.props.ratings[queryString.stringify(this.mergeDefaultFilters(qs))]) {
+    if (!this.props.ratings.results[queryString.stringify(this.mergeDefaultFilters(qs))]) {
       this.props.filterActions.loadRatings(this.mergeDefaultFilters(qs));
     }
   }
@@ -102,7 +102,6 @@ class Browse extends React.Component {
     const qs = queryString.parse(location.search);
     const qsString = queryString.stringify(this.mergeDefaultFilters(qs));
 
-    // TODO: fix issue with apis being called even thouhg the data is avaiable.
     // TODO: clean the below up.
 
       // {/*<Search*/}
