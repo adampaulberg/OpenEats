@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 
 const Pagination = ({ offset, limit, count, buildUrl }) => {
@@ -9,8 +10,8 @@ const Pagination = ({ offset, limit, count, buildUrl }) => {
   let next = offset + limit;
   let previous = offset - limit;
 
-  const link = (title, offset, key) => (
-    <li className="page-item" key={ key }>
+  const link = (title, offset, key, active) => (
+    <li className={classNames({"page-item": true, "active": active})} key={ key }>
       <Link className="page-link" to={ buildUrl('offset', offset) }>
         { title }
       </Link>
@@ -29,7 +30,7 @@ const Pagination = ({ offset, limit, count, buildUrl }) => {
     start = start < 1 ? 1 : start;
 
     for (let i = start; i < count/limit && i < max + start; i++) {
-      numbers.push(link(i+1, limit*i, i+1))
+      numbers.push(link(i+1, limit*i, i+1, offset==limit*i))
     }
     return numbers
   };
@@ -38,7 +39,7 @@ const Pagination = ({ offset, limit, count, buildUrl }) => {
     <div className="text-center">
       <ul className="pagination">
         { (previous >= 0) ? link('←', previous, 'previous') : '' }
-        { link('1', 0, 'first') }
+        { link('1', 0, 'first', offset==0) }
         { numbers(offset, limit, count) }
         { (next < count) ? link('→', next, 'next') : '' }
       </ul>
