@@ -30,7 +30,8 @@ const Filter = ({title, data, qs, buildUrl, intl}) => {
     }
   });
 
-  let header = intl.formatMessage(messages.filter_x, {title: title});
+  const defaultHeader = intl.formatMessage(messages.filter_x, {title: title});
+  let header = '';
 
   const clear = qs[title] ?
     <LinkContainer
@@ -42,17 +43,20 @@ const Filter = ({title, data, qs, buildUrl, intl}) => {
     : '';
 
   const items = data.map((item) => {
-    if (item.total == 0) { return null; }
+    if (item.total == 0) {
+      return null;
+    }
 
     let active = false;
     if (title == "rating") {
       item.slug = item.rating;
       item.title = intl.formatMessage(messages.x_stars, {rating: item.rating});
     }
-
-    if (qs[title] === item.slug.toString()) {
-      active = true;
-      header = item.title;
+    if (qs[title]) {
+      if (qs[title].split(',').includes(item.slug.toString())) {
+        active = true;
+        header += item.title + ', ';
+      }
     }
 
     return (
@@ -67,7 +71,7 @@ const Filter = ({title, data, qs, buildUrl, intl}) => {
 
   return (
     <div className="btn-group filter-group">
-      <DropdownButton id="" title={ header }>
+      <DropdownButton id="" title={ header.substring(0, header.length - 2) || defaultHeader }>
         { items }
       </DropdownButton>
       { clear }

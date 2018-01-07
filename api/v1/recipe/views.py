@@ -40,7 +40,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
         if 'course__slug' in self.request.query_params:
             filter_set['course__in'] = Course.objects.filter(
-                slug=self.request.query_params.get('course__slug').split(',')
+                slug__in=self.request.query_params.get('course__slug').split(',')
             )
         if 'rating' in self.request.query_params:
             filter_set['rating__in'] = self.request.query_params.get('rating').split(',')
