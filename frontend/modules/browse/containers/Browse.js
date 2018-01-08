@@ -75,22 +75,19 @@ class Browse extends React.Component {
 
     let qs = queryString.parse(this.props.location.search);
 
-    // TODO: fix this!!!
     if (value !== "") {
       if (qs[name]) {
-        if (qs[name].split(',').includes(value)) {
-          let newval = '';
-          console.log(qs[name])
-          qs[name].split(',').map(val => {
-            if (val != value) {
-              newval = newval + "," + value;
-            }
-          });
-          console.log(newval)
-          console.log('----')
-          qs[name] = newval;
+        let query = qs[name].split(',');
+        if (query.includes(value)) {
+          if (query.length === 1) {
+            delete qs[name];
+          } else {
+            let str = '';
+            query.map(val => { val != value ? str += val + ',' : ''});
+            qs[name] = str.substring(0, str.length - 1);
+          }
         } else {
-          qs[name] = qs[name] + "," + value;
+          qs[name] = qs[name] + ',' + value;
         }
       } else {
         qs[name] = value;
