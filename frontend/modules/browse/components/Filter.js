@@ -11,7 +11,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 require("./../css/filter.scss");
 
-const Filter = ({title, data, qs, buildUrl, intl}) => {
+const Filter = ({title, data, qs, multiSelect, buildUrl, intl}) => {
   const messages = defineMessages({
     filter_x: {
       id: 'filter.filter_x',
@@ -60,7 +60,7 @@ const Filter = ({title, data, qs, buildUrl, intl}) => {
     }
 
     return (
-      <LinkContainer key={ item.slug } to={ buildUrl(title, item.slug) }>
+      <LinkContainer key={ item.slug } to={ buildUrl(title, item.slug, multiSelect) }>
         <MenuItem className={ classNames({ active: active }) }>
           { item.title }
           { item.total ? <span className="badge">{ item.total }</span> : '' }

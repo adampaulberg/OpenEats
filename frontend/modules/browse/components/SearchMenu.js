@@ -25,18 +25,21 @@ class SearchMenu extends React.Component {
             title="course"
             data={ courses || [] }
             qs={ qs }
+            multiSelect={ true }
             buildUrl={ buildUrl }
           />
           <Filter
             title="cuisine"
             data={ cuisines || [] }
             qs={ qs }
+            multiSelect={ true }
             buildUrl={ buildUrl }
           />
           <Filter
             title="rating"
             data={ ratings || [] }
             qs={ qs }
+            multiSelect={ true }
             buildUrl={ buildUrl }
           />
           <Filter

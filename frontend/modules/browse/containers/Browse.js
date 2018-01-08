@@ -70,13 +70,13 @@ class Browse extends React.Component {
     history.push(str);
   };
 
-  buildUrl = (name, value) => {
+  buildUrl = (name, value, multiSelect=false) => {
     if (!name) return '/browse/';
 
     let qs = queryString.parse(this.props.location.search);
 
     if (value !== "") {
-      if (qs[name]) {
+      if (qs[name] && multiSelect) {
         let query = qs[name].split(',');
         if (query.includes(value)) {
           if (query.length === 1) {
