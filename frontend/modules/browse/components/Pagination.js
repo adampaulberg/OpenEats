@@ -47,8 +47,8 @@ const Pagination = ({ offset, limit, count, buildUrl }) => {
   )
 };
 
-// Ratings.propTypes = {
-//   stars: PropTypes.number.isRequired
-// };
+Pagination.propTypes = {
+  buildUrl: PropTypes.func.isRequired
+};
 
 export default Pagination;

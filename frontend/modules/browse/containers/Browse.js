@@ -156,15 +156,15 @@ class Browse extends React.Component {
   }
 }
 
-// Recipe.propTypes = {
-//   recipes: PropTypes.array.isRequired,
-//   lists: PropTypes.array.isRequired,
-//   status: PropTypes.string.isRequired,
-//   user: PropTypes.object.isRequired,
-//   match: PropTypes.object.isRequired,
-//   recipeActions: PropTypes.object.isRequired,
-//   recipeItemActions: PropTypes.object.isRequired,
-// };
+Browse.propTypes = {
+  search: PropTypes.object.isRequired,
+  courses: PropTypes.object.isRequired,
+  cuisines: PropTypes.object.isRequired,
+  ratings: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  filterActions: PropTypes.object.isRequired,
+  searchActions: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
   search: state.browse.search,

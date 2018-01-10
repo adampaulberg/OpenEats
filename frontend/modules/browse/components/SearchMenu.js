@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import {
     injectIntl,
     defineMessages
@@ -142,6 +143,16 @@ const SearchMenu = ({courses, cuisines, ratings, qs, count, doSearch, buildUrl, 
       </div>
     </div>
   );
+};
+
+SearchMenu.propTypes = {
+  qs: PropTypes.object.isRequired,
+  courses: PropTypes.array,
+  cuisines: PropTypes.array,
+  ratings: PropTypes.array,
+  doSearch: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired,
+  buildUrl: PropTypes.func.isRequired,
 };
 
 export default injectIntl(SearchMenu);

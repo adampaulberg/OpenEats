@@ -1,5 +1,6 @@
 import React from 'react'
 import DebounceInput from 'react-debounce-input';
+import PropTypes from 'prop-types'
 import {
     injectIntl,
     IntlProvider,
@@ -99,5 +100,12 @@ class SearchBar extends React.Component {
     )
   }
 }
+
+SearchBar.propTypes = {
+  value: PropTypes.string,
+  format: PropTypes.string,
+  doSearch: PropTypes.func,
+  intl: PropTypes.object,
+};
 
 export default injectIntl(SearchBar);

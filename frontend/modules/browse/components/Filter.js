@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
@@ -45,6 +46,16 @@ const Filter = ({title, qsTitle, data, qs, multiSelect, cssClass, buildUrl}) => 
       { clear }
     </div>
   );
+};
+
+Filter.propTypes = {
+  title: PropTypes.string.isRequired,
+  qsTitle: PropTypes.string.isRequired,
+  data: PropTypes.array.isRequired,
+  multiSelect: PropTypes.bool,
+  qs: PropTypes.object.isRequired,
+  cssClass: PropTypes.string,
+  buildUrl: PropTypes.func.isRequired,
 };
 
 export default Filter;
