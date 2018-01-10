@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 
-const Filter = ({title, qsTitle, data, qs, multiSelect, buildUrl}) => {
+const Filter = ({title, qsTitle, data, qs, multiSelect, cssClass, buildUrl}) => {
   let header = '';
   const clear = qs[qsTitle] ?
     <LinkContainer
@@ -38,7 +38,7 @@ const Filter = ({title, qsTitle, data, qs, multiSelect, buildUrl}) => {
   });
 
   return (
-    <div className="btn-group filter-group">
+    <div className={ "btn-group filter-group " + cssClass }>
       <DropdownButton id="" title={ header.substring(0, header.length - 2) || title }>
         { items }
       </DropdownButton>

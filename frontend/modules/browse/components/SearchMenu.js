@@ -119,6 +119,7 @@ const SearchMenu = ({courses, cuisines, ratings, qs, count, doSearch, buildUrl, 
             {id: 2, title: "8", slug: "8"},
             {id: 3, title: "16", slug: "16"},
           ]}
+          cssClass='hidden-xs'
           qs={ qs }
           buildUrl={ buildUrl }
         />
@@ -130,6 +131,7 @@ const SearchMenu = ({courses, cuisines, ratings, qs, count, doSearch, buildUrl, 
             {id: 2, title: intl.formatMessage(messages.pub_date), slug: "-pub_date"},
             {id: 3, title: intl.formatMessage(messages.rating), slug: "-rating"},
           ]}
+          cssClass='hidden-xs'
           qs={ qs }
           buildUrl={ buildUrl }
         />
