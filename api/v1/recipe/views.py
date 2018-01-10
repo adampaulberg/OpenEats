@@ -30,8 +30,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         query = Recipe.objects
-
         filter_set = {}
+
+        # If user is anonymous, restrict recipes to public.
+        if not self.request.user.is_authenticated:
+            filter_set['public'] = True
+
         if 'cuisine__slug' in self.request.query_params:
             filter_set['cuisine__in'] = Cuisine.objects.filter(
                 slug__in=self.request.query_params.get('cuisine__slug').split(',')
@@ -44,16 +48,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if 'rating' in self.request.query_params:
             filter_set['rating__in'] = self.request.query_params.get('rating').split(',')
 
-        print filter_set
-
         return query.filter(**filter_set)
-
-    def get_queryset(self):
-        # If user is anonymous, restrict recipes to public.
-        if self.request.user.is_authenticated:
-            return Recipe.objects.all()
-        else:
-            return Recipe.objects.filter(public=True)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -127,7 +122,7 @@ class RatingViewSet(viewsets.ReadOnlyModelViewSet):
 
         # If user is anonymous, restrict recipes to public.
         if not self.request.user.is_authenticated:
-            filter_set['public']=True
+            filter_set['public'] = True
 
         if 'cuisine' in self.request.query_params:
             try:

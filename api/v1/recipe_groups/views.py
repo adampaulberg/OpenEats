@@ -45,7 +45,7 @@ class CuisineCountViewSet(viewsets.ModelViewSet):
 
         # If user is anonymous, restrict recipes to public.
         if not self.request.user.is_authenticated:
-            filter_set['public']=True
+            filter_set['public'] = True
 
         if 'course' in self.request.query_params:
             try:
@@ -102,7 +102,7 @@ class CourseCountViewSet(viewsets.ModelViewSet):
 
         # If user is anonymous, restrict recipes to public.
         if not self.request.user.is_authenticated:
-            filter_set['public']=True
+            filter_set['public'] = True
 
         if 'cuisine' in self.request.query_params:
             try:
