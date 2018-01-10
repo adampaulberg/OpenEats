@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
+import { injectIntl } from 'react-intl';
 
 import history from '../../common/history'
 import SearchMenu from '../components/SearchMenu'
@@ -16,7 +17,7 @@ import documentTitle from '../../common/documentTitle'
 
 class Browse extends React.Component {
   componentDidMount() {
-    // documentTitle(this.props.intl.messages['nav.recipes']);
+    documentTitle(this.props.intl.messages['nav.recipes']);
     this.reloadData(queryString.parse(this.props.location.search))
   }
 
@@ -177,7 +178,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   searchActions: bindActionCreators(SearchActions, dispatch),
 });
 
-export default connect(
+export default injectIntl(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Browse);
+)(Browse));
