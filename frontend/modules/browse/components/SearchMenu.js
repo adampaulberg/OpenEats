@@ -80,7 +80,7 @@ const SearchMenu = ({courses, cuisines, ratings, qs, count, doSearch, buildUrl, 
 
   return (
     <div className="row search-menu">
-      <SearchBar format="col-xs-12" value={ qs.search } doSearch={ doSearch }/>
+      <SearchBar format="col-xs-12" value={ qs ? qs.search : '' } doSearch={ doSearch }/>
       <div className="col-xs-12">
         <Filter
           title={ intl.formatMessage(messages.filter_course) }
