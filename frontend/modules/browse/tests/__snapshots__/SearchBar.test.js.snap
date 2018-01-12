@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading component test 1`] = `
+<div
+  className={undefined}
+>
+  <div
+    className="input-group search-bar"
+  >
+    <span
+      className="input-group-addon"
+      id="search_bar_label"
+    >
+      <span
+        className="hidden-xs"
+      >
+        Search for Recipes
+        :
+      </span>
+      <span
+        className="visible-xs"
+      >
+        Search
+        :
+      </span>
+    </span>
+    <input
+      aria-describedby="search_bar_label"
+      className="form-control"
+      name="SearchBar"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Enter a title, tag, or ingredient"
+      type="text"
+      value=""
+    />
+    
+  </div>
+</div>
+`;
