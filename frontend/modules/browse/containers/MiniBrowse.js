@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { request } from '../../common/CustomSuperagent';
-import ListRecipes from './ListRecipes'
+import ListRecipes from '../components/ListRecipes'
 import { serverURLs } from '../../common/config'
 
 require("./../css/browse.scss");
