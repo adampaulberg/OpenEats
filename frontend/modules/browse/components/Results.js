@@ -6,23 +6,21 @@ import Pagination from './Pagination'
 
 const Results = ({ search, qs, defaults, buildUrl }) => {
   return (
-    <div className="row">
-      <div className="col-xs-12">
-        <div id="browse" className="row">
-          <ListRecipes
-            format="col-xs-12 col-sm-6 col-md-4 col-lg-3"
-            data={ search.recipes }
+    <div className="col-xs-9">
+      <div id="browse" className="row">
+        <ListRecipes
+          format="col-xs-12 col-sm-6 col-md-4 col-lg-3"
+          data={ search.recipes }
+        />
+      </div>
+      <div className="row">
+        <div className="col-xs-12">
+          <Pagination
+            limit={ qs.limit || defaults.limit }
+            count={ search.totalRecipes }
+            offset={ qs.offset || defaults.offset }
+            buildUrl={ buildUrl }
           />
-        </div>
-        <div className="row">
-          <div className="col-xs-12">
-            <Pagination
-              limit={ qs.limit || defaults.limit }
-              count={ search.totalRecipes }
-              offset={ qs.offset || defaults.offset }
-              buildUrl={ buildUrl }
-            />
-          </div>
         </div>
       </div>
     </div>

@@ -6,10 +6,8 @@ import queryString from 'query-string'
 import { injectIntl } from 'react-intl';
 
 import history from '../../common/history'
-import SearchMenu from '../components/SearchMenu'
-import Results from '../components/Results'
-import NoResults from '../components/NoResults'
-import Loading from '../components/Loading'
+import Search from '../components/Search'
+
 import * as SearchActions from '../actions/SearchActions'
 import * as FilterActions from '../actions/FilterActions'
 import DefaultFilters from '../constants/DefaultFilters'
@@ -120,39 +118,17 @@ class Browse extends React.Component {
   };
 
   render() {
-    let { search, courses, cuisines, ratings, location } = this.props;
-    const qs = queryString.parse(location.search);
+    const qs = queryString.parse(this.props.location.search);
     const qsString = queryString.stringify(this.mergeDefaultFilters(qs));
-
-    if (Object.keys(search.results).length > 0) {
-      return (
-        <div className="container">
-          <SearchMenu
-            courses={ courses.results[qsString] }
-            cuisines={ cuisines.results[qsString] }
-            ratings={ ratings.results[qsString] }
-            qs={ qs }
-            count={ search.results[qsString] ? search.results[qsString].totalRecipes : 0 }
-            doSearch={ this.doSearch }
-            buildUrl={ this.buildUrl }
-          />
-          {
-            search.loading ?
-              <Loading/> :
-              !search.results[qsString] || search.results[qsString].recipes.length == 0 ?
-                <NoResults/> :
-                <Results
-                  search={ search.results[qsString] }
-                  qs={ qs }
-                  defaults={ DefaultFilters }
-                  buildUrl={ this.buildUrl }
-                />
-          }
-        </div>
-      );
-    } else {
-      return <Loading/>
-    }
+    return (
+        <Search
+          { ...this.props }
+          qs={ qs }
+          qsString={ qsString }
+          doSearch={ this.doSearch }
+          buildUrl={ this.buildUrl }
+          defaultFilters={ DefaultFilters }
+        />)
   }
 }
 
