@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 
 const Filter = ({title, qsTitle, data, qs, multiSelect, cssClass, buildUrl}) => {
   let header = '';
@@ -29,20 +30,19 @@ const Filter = ({title, qsTitle, data, qs, multiSelect, cssClass, buildUrl}) => 
     }
 
     return (
-      <LinkContainer key={ item.slug } to={ buildUrl(qsTitle, item.slug, multiSelect) }>
-        <MenuItem className={ classNames({ active: active }) }>
-          { item.title }
-          { item.total ? <span className="badge">{ item.total }</span> : '' }
-        </MenuItem>
-      </LinkContainer>
+      <Link key={ item.slug } to={ buildUrl(qsTitle, item.slug, multiSelect) } className="list-group-item">
+        { item.title }
+        { item.total ? <span className="badge">{ item.total }</span> : '' }
+      </Link>
     );
   });
 
   return (
-    <div className={ "btn-group filter-group " + cssClass }>
-      <DropdownButton id="" title={ header.substring(0, header.length - 2) || title }>
+    <div className="list-group">
+    {/*<ul className={ "list-group filter-group " + cssClass }>*/}
+      {/*<DropdownButton id="" title={ header.substring(0, header.length - 2) || title }>*/}
         { items }
-      </DropdownButton>
+      {/*</DropdownButton>*/}
       { clear }
     </div>
   );
