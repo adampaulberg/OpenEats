@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
 
 const Filter = ({title, qsTitle, data, qs, multiSelect, cssClass, buildUrl}) => {
