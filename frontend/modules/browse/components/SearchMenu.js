@@ -122,61 +122,69 @@ class SearchMenu extends React.Component {
         <div className="visible-xs sidebar-header" onClick={ this.toggleMenu }>
           { header }
         </div>
-        <div className={ classNames({"sidebar": true, "hidden-xs": !this.state.showMenu}) }>
-          <Filter
-            title={ intl.formatMessage(messages.filter_course) }
-            qsTitle="course"
-            data={ courses || [] }
-            qs={ qs }
-            multiSelect={ true }
-            buildUrl={ buildUrl }
-          />
-          <Filter
-            title={ intl.formatMessage(messages.filter_cuisine) }
-            qsTitle="cuisine"
-            data={ cuisines || [] }
-            qs={ qs }
-            multiSelect={ true }
-            buildUrl={ buildUrl }
-          />
-          <Filter
-            title={ intl.formatMessage(messages.filter_rating) }
-            qsTitle="rating"
-            data={
-              ratings ? ratings.map(r => {
-                r.slug = r.rating;
-                r.title = intl.formatMessage(messages.x_stars, {rating: r.rating});
-                return r;
-              }) : []
-            }
-            qs={ qs }
-            multiSelect={ true }
-            buildUrl={ buildUrl }
-          />
-          <Filter
-            title={ intl.formatMessage(messages.filter_limit) }
-            qsTitle="limit"
-            data={[
-              {id: 1, title: "4", slug: "4"},
-              {id: 2, title: "8", slug: "8"},
-              {id: 3, title: "16", slug: "16"},
-            ]}
-            cssClass='hidden-xs'
-            qs={ qs }
-            buildUrl={ buildUrl }
-          />
-          <Filter
-            title={ intl.formatMessage(messages.filter_ordering) }
-            qsTitle="ordering"
-            data={[
-              {id: 1, title: intl.formatMessage(messages.title), slug: "title"},
-              {id: 2, title: intl.formatMessage(messages.pub_date), slug: "-pub_date"},
-              {id: 3, title: intl.formatMessage(messages.rating), slug: "-rating"},
-            ]}
-            cssClass='hidden-xs'
-            qs={ qs }
-            buildUrl={ buildUrl }
-          />
+        <div className={ classNames({"sidebar": true, "row": true, "hidden-xs": !this.state.showMenu}) }>
+          <div className="col-sm-12 col-xs-4">
+            <Filter
+              title={ intl.formatMessage(messages.filter_course) }
+              qsTitle="course"
+              data={ courses || [] }
+              qs={ qs }
+              multiSelect={ true }
+              buildUrl={ buildUrl }
+            />
+          </div>
+          <div className="col-sm-12 col-xs-4">
+            <Filter
+              title={ intl.formatMessage(messages.filter_cuisine) }
+              qsTitle="cuisine"
+              data={ cuisines || [] }
+              qs={ qs }
+              multiSelect={ true }
+              buildUrl={ buildUrl }
+            />
+          </div>
+          <div className="col-sm-12 col-xs-4">
+            <Filter
+              title={ intl.formatMessage(messages.filter_rating) }
+              qsTitle="rating"
+              data={
+                ratings ? ratings.map(r => {
+                  r.slug = r.rating;
+                  r.title = intl.formatMessage(messages.x_stars, {rating: r.rating});
+                  return r;
+                }) : []
+              }
+              qs={ qs }
+              multiSelect={ true }
+              buildUrl={ buildUrl }
+            />
+          </div>
+          <div className="col-sm-12 hidden-xs">
+            <Filter
+              title={ intl.formatMessage(messages.filter_limit) }
+              qsTitle="limit"
+              data={[
+                {id: 1, title: "4", slug: "4"},
+                {id: 2, title: "8", slug: "8"},
+                {id: 3, title: "16", slug: "16"},
+              ]}
+              qs={ qs }
+              buildUrl={ buildUrl }
+            />
+          </div>
+          <div className="col-sm-12 hidden-xs">
+            <Filter
+              title={ intl.formatMessage(messages.filter_ordering) }
+              qsTitle="ordering"
+              data={[
+                {id: 1, title: intl.formatMessage(messages.title), slug: "title"},
+                {id: 2, title: intl.formatMessage(messages.pub_date), slug: "-pub_date"},
+                {id: 3, title: intl.formatMessage(messages.rating), slug: "-rating"},
+              ]}
+              qs={ qs }
+              buildUrl={ buildUrl }
+            />
+          </div>
           { Object.keys(qs).length !== 0 ? reset() : '' }
           <div className="page-count hidden-xs">
             { count } { intl.formatMessage(messages.recipes) }
