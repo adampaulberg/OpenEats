@@ -6,14 +6,15 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
 
 const Filter = ({title, qsTitle, data, qs, multiSelect, cssClass, buildUrl}) => {
-  let header = '';
   const clear = qs[qsTitle] ?
-    <LinkContainer
-      activeClassName=''
-      to={ buildUrl(qsTitle, '') }
-      className="btn btn-danger clear-search">
-      <span className="glyphicon glyphicon glyphicon-remove"/>
-    </LinkContainer>
+    <div>
+      <Link
+        activeClassName=''
+        to={ buildUrl(qsTitle, '') }
+        className="list-group-item clear-search">
+        <span className="">Clear</span>
+      </Link>
+    </div>
     : '';
 
   const items = data.map((item) => {
@@ -25,25 +26,28 @@ const Filter = ({title, qsTitle, data, qs, multiSelect, cssClass, buildUrl}) => 
     if (qs[qsTitle]) {
       if (qs[qsTitle].split(',').includes(item.slug.toString())) {
         active = true;
-        header += item.title + ', ';
       }
     }
 
     return (
-      <Link key={ item.slug } to={ buildUrl(qsTitle, item.slug, multiSelect) } className="list-group-item">
-        { item.title }
-        { item.total ? <span className="badge">{ item.total }</span> : '' }
-      </Link>
+      <div>
+        <Link
+            key={ item.slug }
+            to={ buildUrl(qsTitle, item.slug, multiSelect) }
+            className={ classNames({"list-group-item": true, "active": active }) }>
+          { active ? <span className="glyphicon glyphicon-remove"/> : null }
+          { item.title }
+          { item.total ? <span className="badge">{ item.total }</span> : '' }
+        </Link>
+      </div>
     );
   });
 
   return (
-    <div className="list-group">
-    {/*<ul className={ "list-group filter-group " + cssClass }>*/}
-      {/*<DropdownButton id="" title={ header.substring(0, header.length - 2) || title }>*/}
-        { items }
-      {/*</DropdownButton>*/}
-      { clear }
+    <div className={ "list-group filter " + cssClass }>
+      { title }
+      { items }
+      {/*{ clear }*/}
     </div>
   );
 };

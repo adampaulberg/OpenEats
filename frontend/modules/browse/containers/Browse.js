@@ -77,7 +77,7 @@ class Browse extends React.Component {
     if (value !== "") {
       if (qs[name] && multiSelect) {
         let query = qs[name].split(',');
-        if (query.includes(value)) {
+        if (query.includes(value.toString())) {
           if (query.length === 1) {
             delete qs[name];
           } else {
