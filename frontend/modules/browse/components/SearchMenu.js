@@ -78,7 +78,7 @@ const SearchMenu = ({courses, cuisines, ratings, qs, count, doSearch, buildUrl, 
   );
 
   return (
-    <div className="col-lg-2 col-sm-3 col-xs-12 sidebar">
+    <div className="sidebar">
       <Filter
         title={ intl.formatMessage(messages.filter_course) }
         qsTitle="course"

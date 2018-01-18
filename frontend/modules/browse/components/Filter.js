@@ -30,11 +30,8 @@ const Filter = ({title, qsTitle, data, qs, multiSelect, cssClass, buildUrl}) => 
     }
 
     return (
-      <div>
-        <Link
-            key={ item.slug }
-            to={ buildUrl(qsTitle, item.slug, multiSelect) }
-            className={ classNames({"list-group-item": true, "active": active }) }>
+      <div key={ item.slug } >
+        <Link to={ buildUrl(qsTitle, item.slug, multiSelect) } className={ classNames({"list-group-item": true, "active": active }) }>
           { active ? <span className="glyphicon glyphicon-remove"/> : null }
           { item.title }
           { item.total ? <span className="badge">{ item.total }</span> : '' }

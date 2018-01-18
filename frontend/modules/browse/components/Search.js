@@ -12,29 +12,31 @@ const Search = ({ search, courses, cuisines, ratings, qs, qsString, buildUrl, do
     return (
       <div className="container">
         <div className="row">
-          <SearchBar format="col-xs-12" value={ qs ? qs.search : '' } doSearch={ doSearch }/>
-        </div>
-        <div className="row">
-          <SearchMenu
-            courses={ courses.results[qsString] }
-            cuisines={ cuisines.results[qsString] }
-            ratings={ ratings.results[qsString] }
-            qs={ qs }
-            count={ search.results[qsString] ? search.results[qsString].totalRecipes : 0 }
-            buildUrl={ buildUrl }
-          />
-          {
-            search.loading ?
-              <Loading/> :
-              !search.results[qsString] || search.results[qsString].recipes.length == 0 ?
-                <NoResults/> :
-                <Results
-                  search={ search.results[qsString] }
-                  qs={ qs }
-                  defaults={ defaultFilters }
-                  buildUrl={ buildUrl }
-                />
-          }
+          <div className="col-lg-2 col-sm-3 col-xs-12 ">
+            <SearchMenu
+              courses={ courses.results[qsString] }
+              cuisines={ cuisines.results[qsString] }
+              ratings={ ratings.results[qsString] }
+              qs={ qs }
+              count={ search.results[qsString] ? search.results[qsString].totalRecipes : 0 }
+              buildUrl={ buildUrl }
+            />
+          </div>
+          <div className="col-lg-10 col-sm-9 col-xs-12">
+            <SearchBar format="" value={ qs ? qs.search : '' } doSearch={ doSearch }/>
+            {
+              search.loading ?
+                <Loading/> :
+                !search.results[qsString] || search.results[qsString].recipes.length == 0 ?
+                  <NoResults/> :
+                  <Results
+                    search={ search.results[qsString] }
+                    qs={ qs }
+                    defaults={ defaultFilters }
+                    buildUrl={ buildUrl }
+                  />
+            }
+          </div>
         </div>
       </div>
     );
