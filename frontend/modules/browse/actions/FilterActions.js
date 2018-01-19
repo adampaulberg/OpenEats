@@ -31,6 +31,12 @@ export const loadCourses = (filter) => {
           qs: queryString.stringify(filter),
           res: res.body.results
         })
+      ))
+      .catch(err => (
+        dispatch({
+          type: FilterConstants.BROWSE_FILTER_ERROR,
+          filterName: FilterConstants.BROWSE_FILTER_COURSE,
+        })
       ));
   }
 };
@@ -52,6 +58,12 @@ export const loadCuisines = (filter) => {
           qs: queryString.stringify(filter),
           res: res.body.results
         })
+      ))
+      .catch(err => (
+        dispatch({
+          type: FilterConstants.BROWSE_FILTER_ERROR,
+          filterName: FilterConstants.BROWSE_FILTER_CUISINE,
+        })
       ));
   }
 };
@@ -72,6 +84,12 @@ export const loadRatings = (filter) => {
           filterName: FilterConstants.BROWSE_FILTER_RATING,
           qs: queryString.stringify(filter),
           res: res.body.results
+        })
+      ))
+      .catch(err => (
+        dispatch({
+          type: FilterConstants.BROWSE_FILTER_ERROR,
+          filterName: FilterConstants.BROWSE_FILTER_RATING,
         })
       ));
   }

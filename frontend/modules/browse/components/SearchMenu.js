@@ -20,6 +20,21 @@ class SearchMenu extends React.Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+        nextProps.loading ||
+        (
+            nextProps.courses === undefined &&
+            nextProps.cuisines === undefined &&
+            nextProps.rating === undefined &&
+            !nextProps.error
+        )
+    ) {
+      return false;
+    }
+    return true;
+  }
+
   toggleMenu = () => {
     this.setState({showMenu: !this.state.showMenu})
   };

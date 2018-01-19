@@ -121,14 +121,15 @@ class Browse extends React.Component {
     const qs = queryString.parse(this.props.location.search);
     const qsString = queryString.stringify(this.mergeDefaultFilters(qs));
     return (
-        <Search
-          { ...this.props }
-          qs={ qs }
-          qsString={ qsString }
-          doSearch={ this.doSearch }
-          buildUrl={ this.buildUrl }
-          defaultFilters={ DefaultFilters }
-        />)
+      <Search
+        { ...this.props }
+        qs={ qs }
+        qsString={ qsString }
+        doSearch={ this.doSearch }
+        buildUrl={ this.buildUrl }
+        defaultFilters={ DefaultFilters }
+      />
+    )
   }
 }
 
