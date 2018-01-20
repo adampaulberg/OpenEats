@@ -20,12 +20,15 @@ const Search = ({ search, courses, cuisines, ratings, qs, qsString, buildUrl, do
               loading={ courses.loading || cuisines.loading || ratings.loading }
               error={ courses.error || cuisines.error || ratings.error }
               qs={ qs }
-              count={ search.results[qsString] ? search.results[qsString].totalRecipes : 0 }
               buildUrl={ buildUrl }
             />
           </div>
           <div className="col-lg-10 col-sm-9 col-xs-12">
-            <SearchBar format="" value={ qs ? qs.search : '' } doSearch={ doSearch }/>
+            <SearchBar
+              count={ search.results[qsString] ? search.results[qsString].totalRecipes : 0 }
+              value={ qs ? qs.search : '' }
+              doSearch={ doSearch }
+            />
             {
               search.loading ?
                 <Loading/> :

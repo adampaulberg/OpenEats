@@ -40,7 +40,7 @@ class SearchBar extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.value !== nextProps.value;
+    return this.props.value !== nextProps.value || this.props.count !== nextProps.count;
   }
 
   render() {
@@ -56,6 +56,11 @@ class SearchBar extends React.Component {
         description: 'SearchBar mobile label',
         defaultMessage: 'Search',
       },
+      recipes: {
+        id: 'filter.recipes',
+        description: 'recipes',
+        defaultMessage: 'recipes',
+      },
       input_placeholder: {
         id: 'searchbar.placeholder',
         description: 'SearchBar input placeholder',
@@ -66,10 +71,8 @@ class SearchBar extends React.Component {
     let clearInput = '';
     if (this.state.value) {
       clearInput = (
-        <span className="input-group-btn">
-          <button className="btn btn-default" type="button" onClick={ this._clearInput }>
+        <span className="input-group-addon search-clear" onClick={ this._clearInput }>
             <span className="glyphicon glyphicon-remove" aria-hidden="true"/>
-          </button>
         </span>
       )
     }
@@ -95,6 +98,9 @@ class SearchBar extends React.Component {
             value={ this.state.value }
             onChange={ this._onChange }/>
           { clearInput }
+          <span className="input-group-addon hidden-xs">
+            { this.props.count } { formatMessage(messages.recipes) }
+          </span>
         </div>
       </div>
     )

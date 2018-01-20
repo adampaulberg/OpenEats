@@ -77,11 +77,6 @@ class SearchMenu extends React.Component {
         description: 'rating',
         defaultMessage: 'Rating',
       },
-      recipes: {
-        id: 'filter.recipes',
-        description: 'recipes',
-        defaultMessage: 'recipes',
-      },
       pub_date: {
         id: 'filter.pub_date',
         description: 'pub_date',
@@ -201,9 +196,6 @@ class SearchMenu extends React.Component {
             />
           </div>
           { Object.keys(qs).length !== 0 ? reset() : '' }
-          <div className="page-count hidden-xs">
-            { count } { intl.formatMessage(messages.recipes) }
-          </div>
         </div>
       </div>
     );
@@ -215,7 +207,6 @@ SearchMenu.propTypes = {
   courses: PropTypes.array,
   cuisines: PropTypes.array,
   ratings: PropTypes.array,
-  count: PropTypes.number.isRequired,
   buildUrl: PropTypes.func.isRequired,
 };
 
