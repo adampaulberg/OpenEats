@@ -8,6 +8,7 @@ let request = function() {
 
   // Setup some defaults
   customRequest.set('Accept', 'application/json');
+  customRequest.set('Cache-Control', 'no-cache');
   // Add the user token if the user is logged in
   const user = store.getState().user;
   if (user.id) {
