@@ -23,7 +23,7 @@ services:
     env_file:
       env_prod.list
   nginx:
-    image: openeats/nginx
+    build: nginx/
     command: ./start.sh
     ports:
       - "8000:80"
